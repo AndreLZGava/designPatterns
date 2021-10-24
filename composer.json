@@ -1,0 +1,17 @@
+{
+    "name": "vendor/myapp",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "André Luiz Gava",
+            "email": "andrelzgava@gmail.com"
+        }
+    ],
+    "require": {}
+}

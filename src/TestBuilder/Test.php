@@ -11,9 +11,10 @@ class Test  implements TestingInterface{
     private $endTime;
     private $focused;
 
-    const PERMITED_TYPES = ['array', 'object', 'string', 'boolean', 'float', 'integer', 'datetime'];
+    const PERMITED_TYPES = ['array', 'object', 'string', 'boolean', 'float', 'integer'];
 
-    public  static function IWill($element) : Test {
+    public  static function setTest($element) : Test 
+    {
         $objectClass = new Test();
         $objectClass->startTime = date('Y-m-d H:i:s');
         $objectClass->element = $element;
@@ -31,7 +32,8 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function isFalse() : Test{
+    public function isFalse() : Test
+    {
         if($this->focused !== false)
         {
             throw new \Exception('this is not false!');
@@ -50,7 +52,8 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function isNull() : Test {
+    public function isNull() : Test 
+    {
         if($this->focused !== null)
         {
             throw new \Exception('this is not null!');
@@ -59,7 +62,8 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function is(string $type) : Test{
+    public function is(string $type) : Test
+    {
         if(!in_array($type, self::PERMITED_TYPES))
         {
             throw new \Exception("${type} is not permited!");
@@ -73,7 +77,8 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function equal( $value) : Test{
+    public function equal( $value) : Test
+    {
 
         if($this->focused !== $value)
         {
@@ -83,7 +88,8 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function instanceOf( $class) : Test{
+    public function instanceOf( $class) : Test
+    {
         if(get_class($this->focused) !== $class)
         {
             throw new \Exception("this is not a instance of {$class}!");
@@ -92,7 +98,8 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function hasProperty(string $property) : Test{
+    public function hasProperty(string $property) : Test
+    {
         $element = (array) $this->focused;
         if(!array_key_exists($property, $element))
         {
@@ -102,14 +109,26 @@ class Test  implements TestingInterface{
         return $this;
     }
 
-    public function focusOnProperty(string $property) : Test{
+    public function focusOnProperty(string $property) : Test
+    {
         $this->focused = gettype($this->focused) === 'array' ? $this->focused[$property] : $this->focused->$property;
         $this->report[] = __FUNCTION__;
         return $this;
     }
 
-    public function focusOnOriginal() : Test{
+    public function focusOnOriginal() : Test
+    {
         $this->focused = $this->element;
+        $this->report[] = __FUNCTION__;
+        return $this;
+    }
+
+    public function hasMethod(string $function) : Test
+    {
+        if(!method_exists( $this->focused , $function))
+        {
+            throw new \Exception("this doen't have a method called {$propefunctionrty}!");
+        }
         $this->report[] = __FUNCTION__;
         return $this;
     }

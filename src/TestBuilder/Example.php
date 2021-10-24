@@ -8,12 +8,12 @@ class Example {
 
     public function demonstrate() : void
     {
-       Test::IWill('my string')
+       Test::setTest('my string')
             ->is('string')
             ->equal('my string')
             ->report();
 
-        Test::IWill(['name' => 'André'])
+        Test::setTest(['name' => 'André'])
             ->is('array')
             ->hasProperty('name')
             ->report();
@@ -27,7 +27,7 @@ class Example {
             }
         };
 
-        Test::IWill($object)
+        Test::setTest($object)
             ->is('object')
             ->hasProperty('name')
             ->focusOnProperty('name')
@@ -40,6 +40,14 @@ class Example {
             ->isTrue()
             ->equal(true)
             ->focusOnOriginal()
+            ->hasMethod('myMethod')
+            ->report();
+        
+        $date = \DateTime::createFromFormat('d/m/Y', date('d/m/Y'));
+
+        Test::setTest($date)
+            ->is('object')
+            ->instanceof('DateTime')
             ->report();
 
     }

@@ -2,7 +2,7 @@
 namespace App\TestBuilder;
 
 interface TestingInterface {
-    public static function IWill($element) : Test;
+    public static function setTest($element) : Test;
     public function isTrue() : Test;
     public function isFalse() : Test;
     public function isBlank() : Test;
@@ -14,4 +14,5 @@ interface TestingInterface {
     public function report() : Test;
     public function focusOnProperty(string $property) : Test;
     public function focusOnOriginal() : Test;
+    public function hasMethod(string $function) : Test;
 }

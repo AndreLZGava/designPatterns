@@ -4,11 +4,12 @@ namespace App\TestBuilder;
 
 use App\TestBuilder\Test;
 
-class Example {
+class Example
+{
 
-    public function demonstrate() : void
+    public function demonstrate(): void
     {
-       Test::setTest('my string')
+        Test::setTest('my string')
             ->is('string')
             ->equal('my string')
             ->report();
@@ -18,11 +19,13 @@ class Example {
             ->hasProperty('name')
             ->report();
 
-        $object = new class {
+        $object = new class
+        {
             public $name = 'André';
             public $hasElements = true;
-        
-            public function myMethod($arg) { 
+
+            public function myMethod($arg)
+            {
                 return true;
             }
         };
@@ -42,14 +45,12 @@ class Example {
             ->focusOnOriginal()
             ->hasMethod('myMethod')
             ->report();
-        
+
         $date = \DateTime::createFromFormat('d/m/Y', date('d/m/Y'));
 
         Test::setTest($date)
             ->is('object')
             ->instanceof('DateTime')
             ->report();
-
     }
-   
 }
